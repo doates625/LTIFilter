@@ -21,7 +21,7 @@ This library contains functions to making four basic first-order filters:
 
 This library avoids dynamic memory for variable-size filters by pre-allocating fixed-size arrays for every instance. The maximum sizes are defined by the following two macros:
   
-  LTIFILTER_MAX_A : Maximum value of A (>= 2)  S
+  LTIFILTER_MAX_A : Maximum value of A (>= 2)  
   LTIFILTER_MAX_B : Maximum value of B (>= 2)
   
 If either of these macros is not defined at compile time or defined as less than 2, a corresponding error message is thrown by this H-file.
