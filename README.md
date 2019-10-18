@@ -30,4 +30,4 @@ If either of these macros is not defined at compile time or defined as less than
 - [CppUtil](https://github.com/doates625/CppUtil.git)
 
 ### References
-- [DigitalFilter](https://en.wikipedia.org/wiki/Digital_filter)
+- [Digital Filters](https://en.wikipedia.org/wiki/Digital_filter)
