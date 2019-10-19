@@ -4,7 +4,6 @@
  */
 #include "LTIFilter.h"
 #include <CppUtil.h>
-#include <math.h>
 
 /**
  * @brief Constructs LTI filter with given coefficients
@@ -204,7 +203,7 @@ LTIFilter LTIFilter::make_dif(float f_sample)
 /**
  * @brief Performs linear convolution y = x1 * x2
  * @param x1 Array to convolve (length >= 1)
- * @paran x2 Array to convolve (length >= 1)
+ * @param x2 Array to convolve (length >= 1)
  * @param N1 length of x1 (>= 1)
  * @param N2 length of x2 (>= 1)
  * @param y Pointer to output array (length >= N1 + N2 - 1)
@@ -215,8 +214,8 @@ void conv(float* x1, uint8_t N1, float* x2, uint8_t N2, float* y)
 	for (uint8_t n = 0; n < N; n++)
 	{
 		y[n] = 0.0f;
-		uint8_t k_min = max(0, n - (N2 - 1));
-		uint8_t k_max = min(N1 - 1, n);
+		uint8_t k_min = Util::max(0, (int)(n - (N2 - 1)));
+		uint8_t k_max = Util::min(N1 - 1, (int)n);
 		for (uint8_t k = k_min; k <= k_max; k++)
 		{
 			y[n] += x1[k] * x2[n - k];
