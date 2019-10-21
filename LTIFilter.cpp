@@ -214,8 +214,8 @@ void conv(float* x1, uint8_t N1, float* x2, uint8_t N2, float* y)
 	for (uint8_t n = 0; n < N; n++)
 	{
 		y[n] = 0.0f;
-		uint8_t k_min = Util::max(0, (int)(n - (N2 - 1)));
-		uint8_t k_max = Util::min(N1 - 1, (int)n);
+		uint8_t k_min = CppUtil::max(0, (int)(n - (N2 - 1)));
+		uint8_t k_max = CppUtil::min(N1 - 1, (int)n);
 		for (uint8_t k = k_min; k <= k_max; k++)
 		{
 			y[n] += x1[k] * x2[n - k];
