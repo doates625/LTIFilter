@@ -28,21 +28,13 @@ class LTIFilter
 public:
 
 	// Class Routines
-	LTIFilter(
-		uint8_t A, float* a,
-		uint8_t B, float* b);
+	LTIFilter(uint8_t A, float* a, uint8_t B, float* b);
 	LTIFilter();
 	float update(float xn);
 	void reset();
 
 	// Convolution Operation
 	friend LTIFilter operator*(LTIFilter f1, LTIFilter f2);
-
-	// Factory Routines
-	static LTIFilter make_lpf(float f_cutoff, float f_sample);
-	static LTIFilter make_hpf(float f_cutoff, float f_sample);
-	static LTIFilter make_int(float f_sample);
-	static LTIFilter make_dif(float f_sample);
 
 protected:
 	uint8_t A, B;
