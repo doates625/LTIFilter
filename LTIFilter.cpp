@@ -4,6 +4,9 @@
  */
 #include "LTIFilter.h"
 #include <CppUtil.h>
+#include <math.h>
+
+
 
 /**
  * @brief Constructs LTI filter with given coefficients
@@ -18,13 +21,24 @@ LTIFilter::LTIFilter(uint8_t A, float* a, uint8_t B, float* b)
 	this->A = A;
 	this->B = B;
 
-	// Copy and normalize array data by a[0]
-	const float scale = 1.0f / a[0];
-	for (uint8_t k = 0; k < A; k++) this->a[k] = a[k] * scale;
-	for (uint8_t k = 0; k < B; k++) this->b[k] = b[k] * scale;
+	// Copy coefficients
+	for (uint8_t k = 0; k < A; k++) this->a[k] = a[k];
+	for (uint8_t k = 0; k < B; k++) this->b[k] = b[k];
 
 	// Run filter reset routine
 	reset();
+}
+
+/**
+ * @brief Initializes filter
+ * 
+ * Call once before any calls to update().
+ */
+void LTIFilter::init()
+{
+	const float scale = 1.0f / a[0];
+	for (uint8_t k = 0; k < A; k++) a[k] = a[k] * scale;
+	for (uint8_t k = 0; k < B; k++) b[k] = b[k] * scale;
 }
 
 /**
@@ -81,8 +95,10 @@ void LTIFilter::reset()
 LTIFilter operator*(LTIFilter f1, LTIFilter f2)
 {
 	// Allocate data
-	const uint8_t A = f1.A + f2.A - 1; float a[A];
-	const uint8_t B = f1.B + f2.B - 1; float b[B];
+	const uint8_t A = f1.A + f2.A - 1;
+	const uint8_t B = f1.B + f2.B - 1;
+	float a[LTIFILTER_MAX_A];
+	float b[LTIFILTER_MAX_B];
 
 	// Convolve filters
 	conv(f1.a, f1.A, f2.a, f2.A, a);

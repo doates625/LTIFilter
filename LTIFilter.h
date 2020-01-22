@@ -30,6 +30,7 @@ public:
 	// Class Routines
 	LTIFilter(uint8_t A, float* a, uint8_t B, float* b);
 	LTIFilter();
+	void init();
 	float update(float xn);
 	void reset();
 
@@ -37,6 +38,7 @@ public:
 	friend LTIFilter operator*(LTIFilter f1, LTIFilter f2);
 
 protected:
+
 	uint8_t A, B;
 	uint8_t frame;
 	float a[LTIFILTER_MAX_A];
